@@ -5,35 +5,32 @@ import { HomePageFilters } from "@/constants/filters";
 import Link from "next/link";
 import HomeFilters from "@/components/home/HomeFilters";
 import NoResult from "@/components/shared/NoResult";
+import QuestionCard from "@/components/cards/QuestionCard";
 
-const questions = [
-  {
-    _id: 1,
-    title: "helloword",
-    tags: [
-      { _id: 1, name: "python" },
-      { id: 2, name: "sql" },
-    ],
-    author: "John Doe",
-    upvotes: 10,
-    views: 100,
-    answers: 2,
-    createdAt: "2021-09-01T12:00:00.000Z",
+const questions = Array.from({ length: 10 }, (_, index) => ({
+  clerkId: index % 2 === 0 ? `clerk${index + 1}` : null,
+  _id: `question${index + 1}`,
+  title: `Question Title ${index + 1}`,
+  tags: [
+    { _id: `tag${index + 1}_1`, name: `Tag ${index + 1}_1` },
+    { _id: `tag${index + 1}_2`, name: `Tag ${index + 1}_2` },
+    // 可以根据需要增加更多标签
+  ],
+  author: {
+    _id: `author${index + 1}`,
+    name: `Author ${index + 1}`,
+    picture: `author${index + 1}.jpg`,
+    clerkId: index % 2 === 0 ? `clerk${index + 1}` : null,
   },
-  {
-    _id: 2,
-    title: "helloword",
-    tags: [
-      { _id: 1, name: "python" },
-      { id: 2, name: "sql" },
-    ],
-    author: "John Doe",
-    upvotes: 10,
-    views: 100,
-    answers: 2,
-    createdAt: "2021-09-01T12:00:00.000Z",
-  },
-];
+  upvotes: Math.floor(Math.random() * 1000000),
+  views: Math.floor(Math.random() * 1000000),
+  answers: [
+    { answerId: 1, content: `Answer ${index + 1}_1` },
+    { answerId: 2, content: `Answer ${index + 1}_2` },
+    // 可以根据需要增加更多答案
+  ],
+  createdAt: new Date(),
+}));
 
 export default function Home() {
   return (
@@ -68,7 +65,7 @@ export default function Home() {
       <div className="mt-10 flex w-full flex-col gap-6">
         {questions.length > 0 ? (
           questions.map((question) => {
-            return "QustionCard";
+            return <QuestionCard key={question._id} {...question} />;
           })
         ) : (
           <NoResult

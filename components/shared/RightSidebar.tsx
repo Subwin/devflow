@@ -6,19 +6,19 @@ import RenderTag from "./RenderTag";
 const RightSidebar = () => {
   const hotQuestions = [
     {
-      _id: 1,
+      _id: "1",
       title: "hello world1hello world1hello world1hello world1hello world1",
     },
     {
-      _id: 2,
+      _id: "2",
       title: "hello world2hello world2hello world2hello world2hello world2",
     },
     {
-      _id: 3,
+      _id: "3",
       title: "hello world3hello world3hello world3hello world3hello world3",
     },
     {
-      _id: 4,
+      _id: "4",
       title:
         "hello world4hello world4hello world4hello world4hello world4hello world4",
     },
@@ -26,27 +26,27 @@ const RightSidebar = () => {
 
   const popularTags = [
     {
-      _id: 1,
+      _id: "1",
       name: "javascipt",
       totalQuestions: 5,
     },
     {
-      _id: 2,
+      _id: "2",
       name: "javascipt",
       totalQuestions: 4,
     },
     {
-      _id: 3,
+      _id: "3",
       name: "javascipt",
       totalQuestions: 5,
     },
     {
-      _id: 4,
+      _id: "4",
       name: "javascipt",
       totalQuestions: 52,
     },
     {
-      _id: 5,
+      _id: "5",
       name: "javascipt",
       totalQuestions: 1,
     },
