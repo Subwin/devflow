@@ -7,7 +7,6 @@ import HomeFilters from "@/components/home/HomeFilters";
 import NoResult from "@/components/shared/NoResult";
 import QuestionCard from "@/components/cards/QuestionCard";
 import { getQuestions } from "@/lib/actions/question.action";
-import { title } from "process";
 
 export default async function Home() {
   const result = await getQuestions({});
