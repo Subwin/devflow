@@ -6,33 +6,13 @@ import Link from "next/link";
 import HomeFilters from "@/components/home/HomeFilters";
 import NoResult from "@/components/shared/NoResult";
 import QuestionCard from "@/components/cards/QuestionCard";
+import { getQuestions } from "@/lib/actions/question.action";
+import { title } from "process";
 
-const questions = Array.from({ length: 10 }, (_, index) => ({
-  clerkId: index % 2 === 0 ? `clerk${index + 1}` : null,
-  _id: `question${index + 1}`,
-  title: `Question Title ${index + 1}`,
-  tags: [
-    { _id: `tag${index + 1}_1`, name: `Tag ${index + 1}_1` },
-    { _id: `tag${index + 1}_2`, name: `Tag ${index + 1}_2` },
-    // 可以根据需要增加更多标签
-  ],
-  author: {
-    _id: `author${index + 1}`,
-    name: `Author ${index + 1}`,
-    picture: `author${index + 1}.jpg`,
-    clerkId: index % 2 === 0 ? `clerk${index + 1}` : null,
-  },
-  upvotes: Math.floor(Math.random() * 1000000),
-  views: Math.floor(Math.random() * 1000000),
-  answers: [
-    { answerId: 1, content: `Answer ${index + 1}_1` },
-    { answerId: 2, content: `Answer ${index + 1}_2` },
-    // 可以根据需要增加更多答案
-  ],
-  createdAt: new Date(),
-}));
+export default async function Home() {
+  const result = await getQuestions({});
+  console.log(result.questions);
 
-export default function Home() {
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -63,9 +43,21 @@ export default function Home() {
       <HomeFilters />
 
       <div className="mt-10 flex w-full flex-col gap-6">
-        {questions.length > 0 ? (
-          questions.map((question) => {
-            return <QuestionCard key={question._id} {...question} />;
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => {
+            return (
+              <QuestionCard
+                key={question._id}
+                _id={question._id}
+                title={question.title}
+                tags={question.tags}
+                author={question.author}
+                upvotes={question.upvotes}
+                views={question.views}
+                answers={question.answers}
+                createdAt={question.createdAt}
+              />
+            );
           })
         ) : (
           <NoResult
